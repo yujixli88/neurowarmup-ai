@@ -10,7 +10,7 @@ Adaptive cognitive warm-up assistant for students: a 5-minute training before st
 ## Run locally
 ```bash
 pip install -r requirements.txt
-streamlit run app.py
+python -m streamlit run app.py
 ```
 Get a free API key at aistudio.google.com and paste it into the sidebar (or set the GEMINI_API_KEY environment variable). Mental Math, Stroop and the hand exercise work without a key.
 
