@@ -39,12 +39,11 @@ T = {
     'ru': {
         'caption': 'Адаптивный ИИ-тренажёр для 5-минутной разминки мозга перед учёбой и экзаменами',
         'settings': '⚙️ Настройки',
-        'api_label': 'Google Gemini API Key:',
         'diff_label': 'Стартовый уровень счёта:',
         'easy': 'Лёгкий', 'medium': 'Средний', 'hard': 'Хардкор',
-        'sidebar_info': 'Счёт, тест Струпа и упражнение для рук работают без ключа. Ключ нужен для ИИ-тренера и головоломок.',
+        'sidebar_info': 'Счёт, тест Струпа, упражнение для рук и встроенные головоломки работают без API-ключа.',
         'tab1': '🔢 Устный счёт', 'tab2': '🎨 Тест Струпа', 'tab3': '✌️ Нейрогимнастика и логика',
-        'no_key': '⚠️ Сначала вставь API-ключ в настройках выше!',
+        'no_key': 'ИИ-тренер сейчас недоступен. Остальные упражнения работают.',
         'api_error': 'Ошибка API: {e}',
         'ai_lang': 'Отвечай на русском языке.',
         'math_title': 'Адаптивный устный счёт',
@@ -71,7 +70,7 @@ T = {
         'bunny': '✌️ Зайчик', 'circle': '👌 Круг',
         'left': 'Левая рука', 'right': 'Правая рука',
         'hands_done': 'Готово! Руки и мозг разогреты 🙌',
-        'puzzle_title': '**Мини-головоломка** (с API-ключом её придумывает ИИ, без ключа берётся из встроенного набора)',
+        'puzzle_title': '**Мини-головоломка** (если ИИ не настроен, используется встроенный набор)',
         'puzzle_btn': '🧩 Сгенерировать головоломку',
         'puzzle_prompt': 'Придумай одну нестандартную короткую логическую задачу на внимательность (уровень: {level}) для разминки мозга перед экзаменом. Сначала только условие. Ответ напиши в самом конце после строки {sep}',
         'show_answer': 'Показать ответ',
@@ -79,12 +78,11 @@ T = {
     'en': {
         'caption': 'Adaptive AI trainer for a 5-minute brain warm-up before studying or exams',
         'settings': '⚙️ Settings',
-        'api_label': 'Google Gemini API Key:',
         'diff_label': 'Starting math level:',
         'easy': 'Easy', 'medium': 'Medium', 'hard': 'Hardcore',
-        'sidebar_info': 'Math, the Stroop test and the hand exercise work without a key. The key is needed for the AI coach and puzzles.',
+        'sidebar_info': 'Math, the Stroop test, the hand exercise and built-in puzzles work without an API key.',
         'tab1': '🔢 Mental Math', 'tab2': '🎨 Stroop Test', 'tab3': '✌️ Brain & Hand Challenge',
-        'no_key': '⚠️ Please paste your API key in the settings above first!',
+        'no_key': 'The AI coach is currently unavailable. The other exercises still work.',
         'api_error': 'API error: {e}',
         'ai_lang': 'Answer in English.',
         'math_title': 'Adaptive Mental Math',
@@ -111,7 +109,7 @@ T = {
         'bunny': '✌️ Bunny', 'circle': '👌 Circle',
         'left': 'Left hand', 'right': 'Right hand',
         'hands_done': 'Done! Your hands and brain are warmed up 🙌',
-        'puzzle_title': '**Mini puzzle** (with an API key the AI invents it, without a key it comes from a built-in set)',
+        'puzzle_title': '**Mini puzzle** (uses built-in puzzles when AI is not configured)',
         'puzzle_btn': '🧩 Generate a puzzle',
         'puzzle_prompt': 'Come up with one non-standard short logic puzzle about attentiveness (level: {level}) for a brain warm-up before an exam. First give only the puzzle. Write the answer at the very end after the line {sep}',
         'show_answer': 'Show answer',
@@ -233,12 +231,11 @@ st.markdown('<div class="nw-title">NEUROWARMUP AI</div>', unsafe_allow_html=True
 st.markdown('<div class="nw-sub">' + t('caption') + '</div>', unsafe_allow_html=True)
 
 with st.expander(t('settings')):
-    api_key = st.text_input(t('api_label'), value='', type='password')
     difficulty = st.select_slider(t('diff_label'), options=['easy', 'medium', 'hard'], value='medium',
                                   format_func=lambda k: T[lang][k])
     st.info(t('sidebar_info'))
 
-effective_api_key = api_key.strip() or os.environ.get('GEMINI_API_KEY', '')
+effective_api_key = os.environ.get('GEMINI_API_KEY', '')
 
 # ---------- Functions ----------
 def ask_gemini(prompt):
