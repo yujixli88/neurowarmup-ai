@@ -41,7 +41,6 @@ T = {
         'settings': '⚙️ Настройки',
         'diff_label': 'Стартовый уровень счёта:',
         'easy': 'Лёгкий', 'medium': 'Средний', 'hard': 'Хардкор',
-        'sidebar_info': 'Счёт, тест Струпа, упражнение для рук и встроенные головоломки работают без API-ключа.',
         'tab1': '🔢 Устный счёт', 'tab2': '🎨 Тест Струпа', 'tab3': '✌️ Нейрогимнастика и логика',
         'no_key': 'ИИ-тренер сейчас недоступен. Остальные упражнения работают.',
         'api_error': 'Ошибка API: {e}',
@@ -80,7 +79,6 @@ T = {
         'settings': '⚙️ Settings',
         'diff_label': 'Starting math level:',
         'easy': 'Easy', 'medium': 'Medium', 'hard': 'Hardcore',
-        'sidebar_info': 'Math, the Stroop test, the hand exercise and built-in puzzles work without an API key.',
         'tab1': '🔢 Mental Math', 'tab2': '🎨 Stroop Test', 'tab3': '✌️ Brain & Hand Challenge',
         'no_key': 'The AI coach is currently unavailable. The other exercises still work.',
         'api_error': 'API error: {e}',
@@ -233,7 +231,6 @@ st.markdown('<div class="nw-sub">' + t('caption') + '</div>', unsafe_allow_html=
 with st.expander(t('settings')):
     difficulty = st.select_slider(t('diff_label'), options=['easy', 'medium', 'hard'], value='medium',
                                   format_func=lambda k: T[lang][k])
-    st.info(t('sidebar_info'))
 
 effective_api_key = os.environ.get('GEMINI_API_KEY', '')
 
